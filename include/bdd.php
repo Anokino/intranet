@@ -2,7 +2,7 @@
 function seConnecter()
 {
    $serveur = 'mysql:host=localhost;port=3307';
-   $bdd = 'dbname=syndic';
+   $bdd = 'dbname=Hotel';
    $user = 'root';
    $mdp = '';
    try {
@@ -14,9 +14,33 @@ function seConnecter()
 };
 
   
-function getLesCoproprietes($bdd)
+function getLesSIRET($bdd)
 {
-   $req = "SELECT * FROM `copropriete`";
+   $req = "SELECT ENT_SIRET FROM `entreprise`";
+   $res = $bdd->query($req);
+   $lesLignes = $res->fetchAll();
+   return $lesLignes;
+};
+
+function getLesEntreprises($bdd)
+{
+   $req = "SELECT * FROM `entreprise`";
+   $res = $bdd->query($req);
+   $lesLignes = $res->fetchAll();
+   return $lesLignes;
+};
+
+function getLesRessources($bdd)
+{
+   $req = "SELECT * FROM `ressource`";
+   $res = $bdd->query($req);
+   $lesLignes = $res->fetchAll();
+   return $lesLignes;
+};
+
+function getLesDemandesWifi($bdd)
+{
+   $req = "SELECT WIFI_ID FROM `client`";
    $res = $bdd->query($req);
    $lesLignes = $res->fetchAll();
    return $lesLignes;

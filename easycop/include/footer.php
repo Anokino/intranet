@@ -4,7 +4,7 @@
 <footer class="jumbotron jumbotron-fluid text-center">
   <div class="container">
     <br><br><br>
-    <p>SyndicPro</p>
+    <p>Intranet - Hôtel Rabanov</p>
   </div>
       <!-- MDB -->
       <script type="text/javascript" src="../js/mdb.min.js"></script>

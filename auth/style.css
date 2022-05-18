@@ -1,5 +1,6 @@
         body {
             background: #1c242d;
+            font-family: 'Inter', sans-serif;
         }
         
         .box {
@@ -71,4 +72,8 @@
             padding: 5px 10px;
             color: #FFFFFF;
             border-radius: 3px;
+        }
+        
+        .card {
+            margin-bottom: 1rem;
         }

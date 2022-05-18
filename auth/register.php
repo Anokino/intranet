@@ -33,7 +33,7 @@
 	?>
 		<form class="box" action="" method="post">
 			<h1 class="box-logo box-title">
-				<Syndic</h1>
+				<Intranet - Hôtel Rabanov</h1>
 					<h1 class="box-title">Inscription</h1>
 					<input type="text" class="form-control box-input" name="username" placeholder="Nom d'utilisateur" required />
 					<input type="text" class="form-control box-input" name="email" placeholder="Email" required />

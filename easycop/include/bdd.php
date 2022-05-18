@@ -2,7 +2,7 @@
 function seConnecter()
 {
    $serveur = 'mysql:host=localhost;port=3307';
-   $bdd = 'dbname=syndic';
+   $bdd = 'dbname=Hotel';
    $user = 'root';
    $mdp = '';
    try {

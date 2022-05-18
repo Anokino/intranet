@@ -55,6 +55,3 @@
 <?php include "include/footer.php" ?>
 </div>
 </html>
-
-
-        

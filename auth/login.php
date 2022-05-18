@@ -14,7 +14,7 @@
 
 		<form class="box" action="verif.php" method="POST" name="login">
 			<h1 class="box-logo box-title">
-				<Syndic</h1>
+				<Intranet - Hôtel Rabanov</h1>
 					<h1 class="box-title">Connexion</h1>
 					<input class="form-control box-input" type="text" placeholder="Entrer le nom d'utilisateur" name="username" required>
 					<input class="form-control box-input" type="password" placeholder="Entrer le mot de passe" name="password" required>
