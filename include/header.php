@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Intranet - Hôtel Rabanov</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -24,13 +23,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Red+Hat+Display:wght@500&display=swap" rel="stylesheet">
   <!-- MDB -->
   <link rel="stylesheet" href="css/mdb.dark.min.css" />
+
+  <!-- AutoCompletion -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript" src="script/script.js"></script>
 </head>
 
 <body>
   <header>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">Intranet - Hôtel Rabanov</a>
+        <a class="navbar-brand" href="index.php"><img src="img/Rabanov-logo.png" alt="Avatar Logo" style="width:80px;"></a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>

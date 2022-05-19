@@ -39,162 +39,227 @@
 	</div>
 	<center>
 		<br />
-		<br /><br/>
+		<br /><br />
 		<div class="row">
-			<div class="row">
-				<form method="post" action="index.php">
-			</div>
 			<div class="col-sm-6">
 				<div class="card" style="width:80%">
 					<img class="card-img-top" src="img\SyndicPro-logos.osm\SyndicPro-logos.jpeg" alt="Card image">
 					<div class="card-body">
-						<h4 class="card-title">Informations du séjour</h4><br />
-						<p class="card-text">
-						<div class="form-group">
-							<label for="exampleFormControlInput1">SIRET de votre entreprise</label>
-							<?php
-							$lesSIRET = getLesSIRET($bdd); ?>
-							<form action="index.php" method="get">
-								<div id="siret">
-									<select name="ENT" class="form-select">
-										<?php
-										foreach ($lesSIRET as $unSIRET) { ?>
-											<option><?php
-													echo $unSIRET['ENT_SIRET']; ?>
-											</option>
-										<?php } ?>
-										<button class="btn btn-primary" type="submit">AAAAAAAAAAAA<i class="bi bi-check-lg"></i></button>
-									</select>
-								</div>
-							</form>
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Nom du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nom du client" name="nom_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Prénom du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Prénom du client" name="prenom_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Adresse du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Adresse du client" name="adresse_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Ville du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ville du client" name="ville_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Code postal du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Code postal du client" name="cp_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Téléphone du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Téléphone du client" name="tel_client">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Email du client</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Email du client" name="email_client">
-						</div><br />
-						Date du séjour :
-						<input class="form-control" type="text" name="daterange" placeholder="Sélectionnez une date" value="" />
-						<script>
-							$(function() {
-								$('input[name="daterange"]').daterangepicker({
-									opens: 'center',
-									showDropdowns: true,
-								}, function(start, end, label) {
-									console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+						<form method="post" name="nvclient" action="index.php">
+							<h4 class="card-title">Nouveau client ?</h4>
+							<hr />
+							<p class="card-text">
+							<div class="form-group">
+								<label for="ENT_SIRET">SIRET :</label>
+								<input type="text" class="form-control" id="ENT_SIRET" placeholder="SIRET de l'entreprise" name="ENT_SIRET">
+							</div><br />
+							<div class="form-group">
+								<label for="nom_client">Nom du client: </label>
+								<input type="text" class="form-control" id="nom_client" placeholder="Nom du client" name="nom_client">
+							</div><br />
+							<div class="form-group">
+								<label for="prenom_client">Prénom du client :</label>
+								<input type="text" class="form-control" id="prenom_client" placeholder="Prénom du client" name="prenom_client">
+							</div><br />
+							<div class="form-group">
+								<label for="tel_client">Téléphone du client :</label>
+								<input type="text" class="form-control" id="tel_client" placeholder="Téléphone du client" name="tel_client">
+							</div><br />
+							<div class="form-group">
+								<label for="email_client">Email du client :</label>
+								<input type="text" class="form-control" id="email_client" placeholder="Email du client" name="email_client">
+							</div><br />
+							<!--<div class="form-group">
+								<label for="exampleFormControlInput1">Date de début du séjour</label>
+								<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date de début du séjour" name="date_debut">
+							</div><br />
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Date de fin du séjour</label>
+								<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date de fin du séjour" name="date_fin">
+							</div><br />-->
+							<div class="form-group">
+								<label for="carte_bancaire">N° de Carte bancaire :</label>
+								<input type="text" class="form-control" id="carte_bancaire" placeholder="N° de Carte bancaire" name="carte_bancaire">
+							</div><br />
+							Dates du séjour :
+							<input class="form-control" type="text" name="daterange" placeholder="Sélectionnez une date" value="" />
+							<input id="start" name="start">
+							<script>
+								$(function() {
+									$('input[name="daterange"]').daterangepicker({
+										opens: 'center',
+										showDropdowns: true,
+									}, function(start, end, label) {
+										document.nvClient.start.value = start.format('YYYY-MM-DD');
+										console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+									});
 								});
-							});
-						</script><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Date de début du séjour</label>
-							<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date de début du séjour" name="date_debut">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">Date de fin du séjour</label>
-							<input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Date de fin du séjour" name="date_fin">
-						</div><br />
-						<div class="form-group">
-							<label for="exampleFormControlInput1">N° de Carte bancaire :</label>
-							<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="N° de Carte bancaire" name="carte_bancaire">
-						</div><br />
-						</p>
-						<div id="boutonsForm" style="display:flex;justify-content: space-around;flex-direction: row-reverse;align-items: center;">
-							<div id="boutonValider">
-								<button name='btnSubmit' type="submit" class="btn btn-primary">Valider</button>
-								<?php if (isset($_POST['btnSubmit']) && ($_POST['date'])) { ?>
-									<br /><br />
-									<div class="alert alert-success alert-dismissible">
-										<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
-										Devis du <?php echo $_POST['date'] ?> ajouté avec succès !
-									</div>
-								<?php setDevis($bdd, $_POST['date'], $_POST['montant'], $_POST['travaux'], $_POST['presta'], $_POST['copro']);
-								} ?>
+							</script>
+							</p>
+							<div id="boutonsForm" style="display:flex;justify-content: space-around;flex-direction: row-reverse;align-items: center;">
+								<div id="boutonNvClient">
+									<button name='btnCreernvclient' type="submit" class="btn btn-primary">Créer mon compte</button>
+									<?php if (isset($_POST['btnCreernvclient'])) { ?>
+										<br /><br />
+										<div class="alert alert-success alert-dismissible">
+											<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
+											Votre compte a été créé avec succès !
+										</div><?php
+												echo $_POST['start'];
+												setnvClient(
+													$bdd,
+													$_POST['ENT_SIRET'],
+													$_POST['nom_client'],
+													$_POST['prenom_client'],
+													$_POST['email_client'],
+													$_POST['tel_client'],
+													$_POST['carte_bancaire'], //$_POST['daterange']
+												); ?>
+									<?php } ?>
+								</div>
 							</div>
-							<div id="boutonNvClient">
-								<button name='btnSubmit' type="submit" class="btn btn-primary">Nouveau client</button>
-								<?php if (isset($_POST['btnSubmit']) && ($_POST['date'])) { ?>
-									<br /><br />
-									<div class="alert alert-success alert-dismissible">
-										<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
-										Devis du <?php echo $_POST['date'] ?> ajouté avec succès !
-									</div>
-								<?php setDevis($bdd, $_POST['date'], $_POST['montant'], $_POST['travaux'], $_POST['presta'], $_POST['copro']);
-								} ?>
-							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-sm-6">
 				<div class="card" style="width:80%">
-					<img class="card-img-top" src="img\easycop-logos.osm\easycop-logos.jpeg" alt="Card image">
+					<img class="card-img-top" src="img\SyndicPro-logos.osm\SyndicPro-logos.jpeg" alt="Card image">
 					<div class="card-body">
-						<h4 class="card-title">Ressources</h4>
-						<p class="card-text">
-						<div class="container" style="max-width:450px">
-							<div>Salle | Quantité : <output id="rangePrimary">0</output>
-								<div class="range range-primary">
-									<input class="form-range" type="range" name="range" min="0" max="10" value="0" onchange="rangePrimary.value=value">
+						<form method="post" action="index.php">
+							<h4 class="card-title">Déjà Client :</h4>
+							<hr />
+							<p class="card-text">
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Identifiant</label>
+								<div id="formID">
+									<div id="boutonsForm" style="display:flex;">
+										<input type="text" class="form-control" id="CL_ID" placeholder="Votre Identifiant" name="CL_ID" required>
+										<button name='btnID' type="submit" class="btn btn-primary" style="margin-left: 5px;">Valider</button>
+										<?php if (isset($_POST['btnID'])) { ?>
+											<?php $client = getClient($bdd, $_POST['CL_ID']);
+											foreach ($client as $unclient) {
+											} ?>
+										<?php } ?>
+									</div>
 								</div>
-								</label>
-							</div><br />
-
-							<div>Vidéo Projecteur | Quantité : <output id="rangeSecondary">0</output>
-								<div class="range range-primary">
-									<input class="form-range" type="range" name="range" min="0" max="10" value="0" onchange="rangeSecondary.value=value">
-								</div>
-								</label>
-							</div><br />
-							<div>Imprimante | Quantité : <output id="rangeTrimary">0</output>
-								<div class="range range-primary">
-									<input class="form-range" type="range" name="range" min="0" max="10" value="0" onchange="rangeTrimary.value=value">
-								</div>
-								</label>
-							</div><br />
-							<div>Tablette | Quantité : <output id="rangeQrimary">0</output>
-								<div class="range range-primary">
-									<input class="form-range" type="range" name="range" min="0" max="10" value="0" onchange="rangeQrimary.value=value">
-								</div>
-								</label>
+								</p>
 							</div>
-						</div>
+
+						</form>
+						<?php if (isset($_POST['CL_ID'])) { ?>
+							<form method="post" action="index.php">
+								<p class="card-text">
+								<div class="form-group">
+									<label for="ENT_SIRET">SIRET</label>
+									<input type="text" class="form-control" id="ENT_SIRET" placeholder="SIRET de l'entreprise" name="ENT_SIRET" value=<?php echo $unclient['ENT_SIRET'] ?>>
+								</div><br />
+								<div class="form-group">
+									<label for="CL_NOM">Nom du client</label>
+									<input type="text" class="form-control" id="CL_NOM" placeholder="Nom du client" name="nom_client" value=<?php echo $unclient['CL_NOM'] ?>>
+								</div><br />
+								<div class="form-group">
+									<label for="CL_PRENOM">Prénom du client</label>
+									<input type="text" class="form-control" id="CL_PRENOM" placeholder="Prénom du client" name="prenom_client" value=<?php echo $unclient['CL_PRENOM'] ?>>
+								</div><br />
+								<div class="form-group">
+									<label for="CL_TEL">Téléphone du client</label>
+									<input type="text" class="form-control" id="CL_TEL" placeholder="Téléphone du client" name="tel_client" value=<?php echo $unclient['CL_TEL'] ?>>
+								</div><br />
+								<div class="form-group">
+									<label for="CL_EMAIL">Email du client</label>
+									<input type="text" class="form-control" id="CL_EMAIL" placeholder="Email du client" name="email_client" value=<?php echo $unclient['CL_EMAIL'] ?>>
+								</div><br />
+								<div class="form-group">
+									<label for="CL_CB">N° de carte bancaire</label>
+									<input type="text" class="form-control" id="CL_CB" placeholder="Carte Bancaire du client" name="carte_bancaire" value=<?php echo $unclient['CL_CB'] ?>>
+								</div><br />
+								</p>
+								<div id="boutonsForm" style="display:flex;">
+									<button name='btnModif' type="submit" class="btn btn-primary" style="margin-left: 5px;">Modifer mes informations</button>
+									<?php if (isset($_POST['btnModif'])) { ?>
+										<?php updateClient(
+											$bdd,
+											$_COOKIE['CL_ID'],
+											setcookie('CL_ID', $_POST['CL_ID'], time() - 3600),
+											$_POST['ENT_SIRET'],
+											$_POST['nom_client'],
+											$_POST['prenom_client'],
+											$_POST['email_client'],
+											$_POST['tel_client'],
+											$_POST['carte_bancaire'], //$_POST['daterange']
+										); ?>
+									<?php } ?>
+								</div>
+							</form>
+						<?php } ?>
+
 					</div>
-					<a href="back/backoffice.php" class="btn btn-primary">Sélectionner</a>
 				</div>
-				<div class="card" style="width:80%">
-					<img class="card-img-top" src="img\easycop-logos.osm\easycop-logos.jpeg" alt="Card image">
-					<div class="card-body">
-						<h4 class="card-title">Wifi ou pdf ou dans commande</h4><br/>
-						<p class="card-text">Page login ? Deux pages pour nv et déja client ?</p>
-				</div>
-						
 			</div>
 		</div>
+		</div>
+
+
+
+
+		</div>
 		</form>
+		</div>
+		</div>
+		<div class=" card" style="width:80%">
+			<img class="card-img-top" src="img\easycop-logos.osm\easycop-logos.jpeg" alt="Card image">
+			<div class="card-body">
+				<h4 class="card-title">Réserver une séjour</h4><br />
+				<p class="card-text">
+				<div class="form-group">
+					<label for="carte_bancaire">Identifiant</label>
+					<input type="text" class="form-control" id="carte_bancaire" placeholder="N° de Carte bancaire" name="carte_bancaire">
+				</div><br />
+				Dates du séjour :
+				<input class="form-control" type="text" name="daterange" placeholder="Sélectionnez une date" value=""/>
+				<input id="start" name="start">
+				<script>
+					$(function() {
+						$('input[name="daterange"]').daterangepicker({
+							opens: 'center',
+							showDropdowns: true,
+						}, function(start, end, label) {
+							document.nvClient.start.value = start.format('YYYY-MM-DD');
+							console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+						});
+					});
+				</script>
+				</p>
+				<div id="boutonsForm" style="display:flex;justify-content: space-around;flex-direction: row-reverse;align-items: center;">
+					<div id="boutonNvClient">
+						<button name='btnCreernvclient' type="submit" class="btn btn-primary">Créer mon compte</button>
+						<?php if (isset($_POST['btnCreernvclient'])) { ?>
+							<br /><br />
+							<div class="alert alert-success alert-dismissible">
+								<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
+								Votre compte a été créé avec succès !
+							</div><?php
+									echo $_POST['start'];
+									setnvClient(
+										$bdd,
+										$_POST['ENT_SIRET'],
+										$_POST['nom_client'],
+										$_POST['prenom_client'],
+										$_POST['email_client'],
+										$_POST['tel_client'],
+										$_POST['carte_bancaire'], //$_POST['daterange']
+									); ?>
+						<?php } ?>
+					</div>
+				</div>
+				</form>
+				</p>
+			</div>
+
+		</div>
+		</div>
 		</div><br />
 		<?php include "include/footer.php" ?>
 </body>
