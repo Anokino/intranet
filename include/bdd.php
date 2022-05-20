@@ -109,10 +109,8 @@ function updateClient($bdd, $CL_ID, $ENT_SIRET, $CL_NOM, $CL_PRENOM, $CL_EMAIL, 
    //créer un identifiant aléatoire de 6 chiffres et deux lettres
    $req = "UPDATE client
    SET `ENT_SIRET` = '$ENT_SIRET',`CL_NOM` = '$CL_NOM', `CL_PRENOM` = '$CL_PRENOM', `CL_EMAIL` = '$CL_EMAIL', `CL_TEL` = '$CL_TEL', `CL_CB` ='$CL_CB'
-   WHERE `CL_ID` = $CL_ID";
-   echo $req;
+   WHERE `CL_ID` = '$CL_ID'";
    $res = $bdd->exec($req);
-   return $res; 
 };
 
 //Fonctions SET
@@ -124,6 +122,15 @@ function setnvClient($bdd, $ENT_SIRET, $CL_NOM, $CL_PRENOM, $CL_EMAIL, $CL_TEL, 
    $id = rand(100000, 999999) . chr(rand(65, 90)) . chr(rand(65, 90));
    $req = "INSERT INTO `client` (`CL_ID`, `ENT_SIRET`, `CL_NOM`, `CL_PRENOM`, `CL_EMAIL`, `CL_TEL`, `CL_CB`) VALUES ('$id', '$ENT_SIRET', '$CL_NOM', '$CL_PRENOM', '$CL_EMAIL', '$CL_TEL', '$CL_CB')";
    echo $req;
+   $res = $bdd->exec($req);
+   return $res; 
+};
+
+function setSéjour($bdd, $ENT_SIRET, $CL_NOM, $CL_PRENOM, $CL_EMAIL, $CL_TEL, $CL_CB)
+{
+   //créer un identifiant aléatoire de 6 chiffres et deux lettres
+   $id = rand(100000, 999999) . chr(rand(65, 90)) . chr(rand(65, 90));
+   $req = "INSERT INTO `client` (`CL_ID`, `ENT_SIRET`, `CL_NOM`, `CL_PRENOM`, `CL_EMAIL`, `CL_TEL`, `CL_CB`) VALUES ('$id', '$ENT_SIRET', '$CL_NOM', '$CL_PRENOM', '$CL_EMAIL', '$CL_TEL', '$CL_CB')";
    $res = $bdd->exec($req);
    return $res; 
 };

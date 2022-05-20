@@ -174,22 +174,24 @@
 								<div class="form-group">
 									<label for="CL_CB">N° de carte bancaire</label>
 									<input type="text" class="form-control" id="CL_CB" placeholder="Carte Bancaire du client" name="carte_bancaire" value=<?php echo $unclient['CL_CB'] ?>>
-								</div><br />
+								</div>
+								<input type="text" style="visibility:hidden" id="CL_ID" placeholder="ID du client" name="CL_ID" value=<?php echo $unclient['CL_ID'] ?>>
 								</p>
 								<div id="boutonsForm" style="display:flex;">
 									<button name='btnModif' type="submit" class="btn btn-primary" style="margin-left: 5px;">Modifer mes informations</button>
 									<?php if (isset($_POST['btnModif'])) { ?>
 										<?php updateClient(
 											$bdd,
-											$_COOKIE['CL_ID'],
-											setcookie('CL_ID', $_POST['CL_ID'], time() - 3600),
+											$_POST['CL_ID'],
 											$_POST['ENT_SIRET'],
 											$_POST['nom_client'],
 											$_POST['prenom_client'],
 											$_POST['email_client'],
 											$_POST['tel_client'],
 											$_POST['carte_bancaire'], //$_POST['daterange']
-										); ?>
+
+										);
+										unset($_POST['CL_ID']); ?>
 									<?php } ?>
 								</div>
 							</form>
@@ -211,53 +213,59 @@
 		<div class=" card" style="width:80%">
 			<img class="card-img-top" src="img\easycop-logos.osm\easycop-logos.jpeg" alt="Card image">
 			<div class="card-body">
-				<h4 class="card-title">Réserver une séjour</h4><br />
-				<p class="card-text">
-				<div class="form-group">
-					<label for="carte_bancaire">Identifiant</label>
-					<input type="text" class="form-control" id="carte_bancaire" placeholder="N° de Carte bancaire" name="carte_bancaire">
-				</div><br />
-				Dates du séjour :
-				<input class="form-control" type="text" name="daterange" placeholder="Sélectionnez une date" value=""/>
-				<input id="start" name="start">
-				<script>
-					$(function() {
-						$('input[name="daterange"]').daterangepicker({
-							opens: 'center',
-							showDropdowns: true,
-						}, function(start, end, label) {
-							document.nvClient.start.value = start.format('YYYY-MM-DD');
-							console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+				<h4 class="card-title">Réserver un séjour</h4><br />
+				<form method="POST" action="index.php">
+					<p class="card-text">
+					<div class="form-group">
+						<label for="CL_ID_Sejour">Identifiant</label>
+						<input type="text" class="form-control" id="CL_ID_Sejour" placeholder="Identifiant du compte" name="CL_ID_Sejour">
+					</div><br />
+					Dates du séjour :
+					<input class="form-control" type="text" name="daterange" id="daterange" placeholder="Sélectionnez une date"/>
+					<script>
+						$(function() {
+							$('input[id="daterange"]').daterangepicker({
+								opens: 'center',
+								showDropdowns: true,
+							}, function(start, end, label) {
+								//
+								console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+							});
 						});
-					});
-				</script>
-				</p>
-				<div id="boutonsForm" style="display:flex;justify-content: space-around;flex-direction: row-reverse;align-items: center;">
-					<div id="boutonNvClient">
-						<button name='btnCreernvclient' type="submit" class="btn btn-primary">Créer mon compte</button>
-						<?php if (isset($_POST['btnCreernvclient'])) { ?>
-							<br /><br />
-							<div class="alert alert-success alert-dismissible">
-								<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
-								Votre compte a été créé avec succès !
-							</div><?php
-									echo $_POST['start'];
-									setnvClient(
-										$bdd,
-										$_POST['ENT_SIRET'],
-										$_POST['nom_client'],
-										$_POST['prenom_client'],
-										$_POST['email_client'],
-										$_POST['tel_client'],
-										$_POST['carte_bancaire'], //$_POST['daterange']
-									); ?>
-						<?php } ?>
+					</script>
+					<input class="form-control" type="text" name="dateD" id="dateD"/>
+					</p>
+					<div id="boutonsForm" style="display:flex;justify-content: space-around;flex-direction: row-reverse;align-items: center;">
+						<div id="boutonSejour">
+							<button name='btnSejour' type="submit" class="btn btn-primary">Créer mon compte</button>
+							<?php if (isset($_POST['btnSejour'])) { ?>
+								<br /><br />
+								<div class="alert alert-success alert-dismissible">
+									<button type="button" class="btn-close" data-bs-dismiss="alert"></button>✅ -
+									Votre compte a été créé avec succès !
+								</div>
+								<?php
+										$date = $_POST['dateRange'];
+										$dateTiret = str_replace("/", "-", $date);
+										$dateDébut = explode("-", $dateTiret)[0];
+										$dateFin = explode("-", $dateTiret)[1];
+										echo $dateDébut;
+										echo $dateFin;
+										setSéjour(
+											$bdd,
+											$_POST['ENT_SIRET'],
+											$_POST['nom_client'],
+											$_POST['prenom_client'],
+											$_POST['email_client'],
+											$_POST['tel_client'],
+											$_POST['carte_bancaire'], //$_POST['daterange']
+										); ?>
+							<?php } ?>
+						</div>
 					</div>
-				</div>
 				</form>
 				</p>
 			</div>
-
 		</div>
 		</div>
 		</div><br />
